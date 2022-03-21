@@ -323,10 +323,12 @@ alsa_write_float (snd_pcm_t *alsa_dev, float *data, int frames, int channels)
 					snd_pcm_prepare (alsa_dev) ;
 					break ;
 
+#if defined EBADFD
 			case -EBADFD :
 					fprintf (stderr, "alsa_write_float: Bad PCM state.n") ;
 					return 0 ;
 					break ;
+#endif
 
 			case -ESTRPIPE :
 					fprintf (stderr, "alsa_write_float: Suspend event.n") ;
